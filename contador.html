@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contagem Regressiva</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    #contador-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100%;
+      color: #0097b2;
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    #contador {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="contador-container">
+    <h1>O Portal Abre em:</h1>
+    <div id="contador"></div>
+  </div>
+
+  <script>
+    const dataLancamento = new Date('2024-10-25T19:00:00').getTime();
+
+    const atualizarContador = setInterval(() => {
+      const agora = new Date().getTime();
+      const distancia = dataLancamento - agora;
+
+      const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((distancia % (1000 * 60)) / (1000 * 60));
+      const segundos = Math.floor((distancia % (1000)) / 1000);
+
+      document.getElementById('contador').innerHTML = 
+        `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+
+      if (distancia < 0) {
+        clearInterval(atualizarContador);
+        window.open('https://youtu.be/-vnZCtSd_SU', '_blank');
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
